@@ -11,6 +11,9 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+
+
+
 // Event type
 interface Event {
     id: string;
@@ -85,7 +88,7 @@ app.put("/events/:id", (req, res) => {
     const id = req.params.id;
     const event = events.find(e => e.id === id);
     if (event) {
-        event.archived = true;
+        event.archived = !event.archived; 
         res.json(event);
     } else {
         res.status(404).json({ error: "Event not found." });
