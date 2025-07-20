@@ -52,7 +52,7 @@ function isValidDate(date: string) {
 
 // Routes
 
-// GET /events - সব ইভেন্ট দেখাবে (তারিখ ও সময় অনুসারে sort)
+// GET for all events with data and time
 app.get("/events", (req, res) => {
   const sortedEvents = [...events].sort((a, b) => {
     const dtA = new Date(`${a.date}T${a.time}:00`).getTime();
@@ -61,6 +61,25 @@ app.get("/events", (req, res) => {
   });
   res.json(sortedEvents);
 });
+
+
+// POST for create new event
+app.post("/events", (req, res) => {
+  const { title, date, time, notes } = req.body;
+   const category = categorizeEvent(title, notes);
+  const newEvent: Event = {
+    id: uuidv4(),
+    title: title.trim(),
+    date,
+    time,
+    notes,
+    category,
+    archived: false,
+  };
+  events.push(newEvent);
+  res.status(201).json(newEvent);
+});
+
 
 
 
