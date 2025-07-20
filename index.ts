@@ -50,6 +50,20 @@ function isValidDate(date: string) {
 }
 
 
+// Routes
+
+// GET /events - সব ইভেন্ট দেখাবে (তারিখ ও সময় অনুসারে sort)
+app.get("/events", (req, res) => {
+  const sortedEvents = [...events].sort((a, b) => {
+    const dtA = new Date(`${a.date}T${a.time}:00`).getTime();
+    const dtB = new Date(`${b.date}T${b.time}:00`).getTime();
+    return dtA - dtB;
+  });
+  res.json(sortedEvents);
+});
+
+
+
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
