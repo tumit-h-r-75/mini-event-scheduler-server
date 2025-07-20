@@ -26,7 +26,7 @@ interface Event {
 let events: Event[] = [];
 
 
-// AI Categorization Keyword লিস্ট
+// AI Categorization Keyword list
 const workKeywords = ["meeting", "project", "client", "deadline", "report"];
 const personalKeywords = ["birthday", "family", "party", "holiday", "dinner"];
 
@@ -103,7 +103,9 @@ app.delete("/events/:id", (req, res) => {
     res.json({ message: "Event deleted successfully." });
 });
 
-
+app.get('/', (req, res) => {
+    res.send(' Mini-Event server is Running!');
+});
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
