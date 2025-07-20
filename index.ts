@@ -40,6 +40,16 @@ function categorizeEvent(title: string, notes?: string): "Work" | "Personal" | "
 }
 
 
+// Validation Helper
+function isValidTime(time: string) {
+  return /^([01]\d|2[0-3]):([0-5]\d)$/.test(time);
+}
+
+function isValidDate(date: string) {
+  return !isNaN(Date.parse(date));
+}
+
+
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
