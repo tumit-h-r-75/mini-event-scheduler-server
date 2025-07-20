@@ -80,6 +80,19 @@ app.post("/events", (req, res) => {
   res.status(201).json(newEvent);
 });
 
+// PUT for update the status
+app.put("/events/:id", (req, res) => {
+  const id = req.params.id;
+  const event = events.find(e => e.id === id);
+  if (event) {
+    event.archived = true;
+    res.json(event);
+  } else {
+    res.status(404).json({ error: "Event not found." });
+  }
+});
+
+
 
 
 
